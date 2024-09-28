@@ -94,7 +94,7 @@ const mockData: Transaction[] = [
 
 export default function Transactions() {
   const router = useRouter();
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const [darkMode, setDarkMode] = useState(false);
   const [data] = useState(() => [...mockData]);
 
@@ -108,10 +108,10 @@ export default function Transactions() {
   });
 
   useEffect(() => {
-    if (!session) {
-      router.push('/'); // Redirect if not logged in
+    if (status === 'unauthenticated') {
+      router.push('/'); // Redirect if not authenticated
     }
-  }, [session, router]);
+  }, [status, router]);
 
   useEffect(() => {
     if (darkMode) {
@@ -120,6 +120,10 @@ export default function Transactions() {
       document.documentElement.classList.remove('dark');
     }
   }, [darkMode]);
+
+  if (status === 'loading') {
+    return <div>Loading...</div>; // Show a loading state until session is resolved
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
@@ -200,10 +204,7 @@ export default function Transactions() {
                     className="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-300"
                   >
                     {row.getVisibleCells().map((cell) => (
-                      <td
-                        key={cell.id}
-                        className="px-6 py-4 whitespace-nowrap"
-                      >
+                      <td key={cell.id} className="px-6 py-4 whitespace-nowrap">
                         {flexRender(cell.column.columnDef.cell, cell.getContext())}
                       </td>
                     ))}
