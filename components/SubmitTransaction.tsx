@@ -1,3 +1,4 @@
+// SubmitTransaction.tsx
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
@@ -18,6 +19,7 @@ const SubmitTransaction: React.FC<{ darkMode: boolean; setDarkMode: (mode: boole
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    // Here, you would typically send a request to the server to save the transaction
     alert('Transaction submitted successfully!');
     setType('');
     setAmount('');
