@@ -9,7 +9,19 @@ export default NextAuth({
     }),
   ],
   secret: process.env.NEXTAUTH_SECRET,
+  callbacks: {
+    async session({ session, token }) {
+      session.user.role = token.role as 'employee' | 'manager';
+      return session;
+    },
+    async jwt({ token, user }) {
+      if (user) {
+        token.role = user.role || 'employee';  // Set default role as 'employee' if not provided
+      }
+      return token;
+    },
+  },
   pages: {
-    signIn: '/', // Optional: Redirect to home page
+    signIn: '/',  // Optional: Redirect to home page for sign-in
   },
 });
