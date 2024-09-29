@@ -1,3 +1,34 @@
+# Complyance
+
+## Overview
+This project is a full-stack web application designed to manage transactions with a beautiful user interface. It features a dark mode theme and utilizes MongoDB Atlas for data storage.
+
+## Features
+- **Beautiful Home Page**
+![img1](https://github.com/user-attachments/assets/d0a4dc49-e332-45e8-87d7-f44bd44d448e)
+
+- **Dark Mode**
+![img2](https://github.com/user-attachments/assets/50abddb3-dc1e-4612-86c3-433e82d11d73)
+
+- **Transaction Table**
+  Utilizing TanStack for displaying transaction data in a structured table format.
+![img3](https://github.com/user-attachments/assets/88f19395-c4c4-4ba7-a811-adeb5ee49e62)
+
+- **Form Submission Page**
+  A user-friendly form for submitting transaction data.
+  ![img4](https://github.com/user-attachments/assets/0f166df5-c427-488f-aad5-5591664e07d5)
+
+- **Data Storage**
+  All transaction data is securely stored in MongoDB Atlas.
+![img5](https://github.com/user-attachments/assets/93b2f235-3edc-42d9-82e0-754a7ab4bbf5)
+
+## Technologies Used
+- **Frontend:** Next.js, React, Tailwind CSS, Typescript
+- **Backend:** Node.js, Express
+- **Database:** MongoDB Atlas
+- **State Management:** TanStack
+
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
