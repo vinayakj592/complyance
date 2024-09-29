@@ -23,8 +23,8 @@ export default NextAuth({
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
     async session({ session, token }) {
-      // Assign the role from token to session
-      session.user.role = token.role as 'employee' | 'manager';
+      // Check if token.role exists before assigning
+      session.user.role = token.role ? (token.role as 'employee' | 'manager') : 'employee'; 
       return session;
     },
     async jwt({ token, user }) {

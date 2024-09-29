@@ -1,8 +1,24 @@
 import { useState } from 'react';
+import { signIn } from 'next-auth/react';
 import { LogIn, User, UserCog } from 'lucide-react';
 
 export default function RoleSelector({ onLogin }: { onLogin: (role: 'employee' | 'manager') => void }) {
   const [role, setRole] = useState<'employee' | 'manager'>('employee');
+
+  const handleLogin = async (role: 'employee' | 'manager') => {
+    // Perform the login using Google provider
+    const result = await signIn('google', { redirect: false }); // Set redirect to false to handle redirection manually
+    console.log("SignIn Result:", result); // Log the result for debugging
+
+    if (result?.ok) {
+      // Store the role in localStorage
+      localStorage.setItem('userRole', role);
+      console.log("User role stored in localStorage:", role); // Log the stored role
+      onLogin(role); // Callback for login
+    } else {
+      console.error('Login failed', result); // Log any error messages
+    }
+  };
 
   return (
     <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-12">
@@ -35,7 +51,7 @@ export default function RoleSelector({ onLogin }: { onLogin: (role: 'employee' |
         </button>
       </div>
       <button
-        onClick={() => onLogin(role)}
+        onClick={() => handleLogin(role)}
         className="w-full py-2 px-4 font-light bg-blue-600 text-white rounded-md hover:bg-blue-700 transition duration-300 flex items-center justify-center"
       >
         <LogIn className="mr-2" />

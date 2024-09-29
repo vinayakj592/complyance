@@ -10,14 +10,12 @@ export default function Home() {
     const { data: session } = useSession();
 
     const handleGoogleLogin = async (role: 'employee' | 'manager') => {
-        console.log(`Initiating Google Auth login for ${role}`);
+        console.log('Initiating Google Auth login for ${role}');
         await signIn('google', { callbackUrl: '/transactions' });
     };
 
     useEffect(() => {
         if (session) {
-            
-            // Redirect to transactions page for both roles
             router.push('/transactions');
         }
     }, [session, router]);
